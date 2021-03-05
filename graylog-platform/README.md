@@ -36,6 +36,15 @@ TFollowing command execute the application. Thus the application publishes the m
     
      java -jar ./target/graylog-sender.jar
 
+## Dependency
+Currently the only dependency the application has is Graylog. It requires Graylog to be up and running healthy.
+
+Graylog can be started by two options:
+
+1. Build from the [repository](https://github.com/Graylog2/graylog2-server)
+2. [Start using Docker](https://docs.graylog.org/en/4.0/pages/installation/docker.html)
+
+Once it is up and running it can be accessed on http://127.0.0.1:9000/. In addition, it requires creating and input with type GELF HTTP.
 ## Verify messages are being published
 In order to verify the application publishes messages successfully the Graylog UI can be helpful as well as its logs.
 
