@@ -1,12 +1,11 @@
 package com.graylog.sender;
 
+import com.graylog.sender.exceptions.FileParserException;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -26,11 +25,19 @@ public class FileParserTest extends TestCase {
     private static String MESSAGES_EMPTY_FILE = "sample-messages-empty.txt";
     private static String MESSAGES_FILE_NOT_FOUND = "sample-messages-not-found.txt";
 
+    /**
+     * Tests the parser parse a file with many messages
+     * @throws FileParserException
+     */
     @Test
-    public void testGetAllEventsSuccessfulParse10Messages() throws FileParserException{
+    public void testGetAllEventsSuccessfulParse10Messages() throws FileParserException {
         assertEquals(10, fileParser.getAllEvents(MESSAGES_FILE).size());
     }
 
+    /**
+     * Tests the parser parse a file with only 1 message and check the details of it
+     * @throws FileParserException
+     */
     @Test
     public void testGetAllEventsSuccessfulRetrieveDetails() throws FileParserException{
         List<Event> allEvents = fileParser.getAllEvents(MESSAGES_FILE_1_EVENT);
@@ -53,13 +60,21 @@ public class FileParserTest extends TestCase {
         assertEquals(337000000, actualEvent.getOriginResponseTime().intValue());
     }
 
+    /**
+     * Tests the parser when the file is empty
+     * @throws FileParserException
+     */
     @Test
     public void testGetAllEventsSuccessfulEmptyFile() throws FileParserException{
         assertEquals(0, fileParser.getAllEvents(MESSAGES_EMPTY_FILE).size());
     }
 
+    /**
+     * Tests the parser when the file does not exists
+     * @throws FileParserException
+     */
     @Test(expected = FileParserException.class)
-    public void testGetAllEventsFileNotFound() throws FileParserException{
+    public void testGetAllEventsFileNotFound() throws FileParserException {
         fileParser.getAllEvents(MESSAGES_FILE_NOT_FOUND);
     }
 }

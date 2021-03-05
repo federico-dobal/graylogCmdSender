@@ -1,7 +1,10 @@
 package com.graylog.sender;
 
+import com.graylog.sender.exceptions.EventPublisherException;
 import com.squareup.okhttp.*;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,17 +14,24 @@ import java.io.IOException;
 @Service
 public class EventPublisher {
 
-    @Value("${graylog.url.host}")
+    private static Logger LOG = LoggerFactory.getLogger(FileParser.class);
+
+
+
     private String GRAYLOG_URL_HOST;
 
-    @Value("${graylog.url.port}")
+
     private String GRAYLOG_URL_PORT;
+
 
     private OkHttpClient client;
 
-    @Autowired
-    public EventPublisher(OkHttpClient client) {
+    public EventPublisher(@Autowired OkHttpClient client,
+                          @Value("${graylog.url.host:localhost}") String graylogHost,
+                          @Value("${graylog.url.port:1234}") String graylogPort) {
         this.client = client;
+        this.GRAYLOG_URL_HOST = graylogHost;
+        this.GRAYLOG_URL_PORT = graylogPort;
     }
 
     /**
@@ -29,9 +39,14 @@ public class EventPublisher {
      * @param event event to publish
      * @throws IOException
      */
-    public void publish(Event event) throws IOException {
-        JSONObject obj = buildGelfMessageFromEvent(event);
-        publishObject(obj);
+    public void publish(Event event) throws EventPublisherException {
+        try {
+            JSONObject obj = buildGelfMessageFromEvent(event);
+            publishObject(obj);
+        } catch (IOException e) {
+            LOG.error("Error publishing event", e.getStackTrace());
+            throw new EventPublisherException(String.format("Error publishing event", e.getMessage()));
+        }
     }
 
     private void publishObject(JSONObject obj) throws IOException {

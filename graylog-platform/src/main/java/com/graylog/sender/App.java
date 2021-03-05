@@ -1,15 +1,14 @@
 package com.graylog.sender;
 
+import com.graylog.sender.exceptions.EventPublisherException;
+import com.graylog.sender.exceptions.FileParserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -43,7 +42,7 @@ public class App implements CommandLineRunner {
             for(Event event : allEventsFromFile) {
                 try {
                     eventPublisher.publish(event);
-                } catch (IOException e) {
+                } catch (EventPublisherException e) {
                     // Log error and continue with other events
                     LOG.error("Error publishing event", e.getStackTrace());
                     continue;

@@ -1,4 +1,4 @@
-package com.graylog.sender;
+package com.graylog.sender.exceptions;
 
 import java.io.IOException;
 

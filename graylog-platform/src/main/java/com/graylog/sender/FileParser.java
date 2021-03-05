@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.graylog.sender.exceptions.FileParserException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,6 @@ public class FileParser {
     private static String ORIGIN_RESPONSE_TYME = "OriginResponseTime";
 
     private static Logger LOG = LoggerFactory.getLogger(FileParser.class);
-
 
     public FileParser() {
     }
