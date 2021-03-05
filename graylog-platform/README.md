@@ -35,3 +35,13 @@ Tests are ran by executing:
 TFollowing command execute the application. Thus the application publishes the messages on Graylog:
     
      java -jar ./target/graylog-sender.jar
+
+## Verify messages are being published
+In order to verify the application publishes messages successfully the Graylog UI can be helpful as well as its logs.
+
+For instance the messages overview and
+###Messages overview
+![Messages overview](src/main/resources/images/messages_overview.png)
+
+###Message details
+![Message details](src/main/resources/images/message_detail.png)
