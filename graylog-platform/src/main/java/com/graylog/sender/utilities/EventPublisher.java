@@ -17,14 +17,8 @@ public class EventPublisher {
 
     private static Logger LOG = LoggerFactory.getLogger(FileParser.class);
 
-
-
     private String GRAYLOG_URL_HOST;
-
-
     private String GRAYLOG_URL_PORT;
-
-
     private OkHttpClient client;
 
     public EventPublisher(@Autowired OkHttpClient client,
