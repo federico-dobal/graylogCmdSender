@@ -1,10 +1,11 @@
-package com.graylog.sender;
+package com.graylog.sender.utilities;
 
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import com.graylog.sender.exceptions.FileParserException;
+import com.graylog.sender.model.Event;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

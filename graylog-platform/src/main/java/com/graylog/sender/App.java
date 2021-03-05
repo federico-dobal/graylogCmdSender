@@ -2,6 +2,9 @@ package com.graylog.sender;
 
 import com.graylog.sender.exceptions.EventPublisherException;
 import com.graylog.sender.exceptions.FileParserException;
+import com.graylog.sender.model.Event;
+import com.graylog.sender.utilities.EventPublisher;
+import com.graylog.sender.utilities.FileParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

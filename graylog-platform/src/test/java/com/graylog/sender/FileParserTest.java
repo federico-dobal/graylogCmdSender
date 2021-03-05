@@ -1,6 +1,8 @@
 package com.graylog.sender;
 
 import com.graylog.sender.exceptions.FileParserException;
+import com.graylog.sender.model.Event;
+import com.graylog.sender.utilities.FileParser;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

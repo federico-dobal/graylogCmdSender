@@ -1,4 +1,4 @@
-package com.graylog.sender;
+package com.graylog.sender.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

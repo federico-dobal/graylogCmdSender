@@ -1,6 +1,7 @@
-package com.graylog.sender;
+package com.graylog.sender.utilities;
 
 import com.graylog.sender.exceptions.EventPublisherException;
+import com.graylog.sender.model.Event;
 import com.squareup.okhttp.*;
 import org.json.JSONObject;
 import org.slf4j.Logger;
