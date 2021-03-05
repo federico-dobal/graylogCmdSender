@@ -40,8 +40,9 @@ public class App implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        String filePath = args[0];
         try {
-            List<Event> allEventsFromFile = fileParser.getAllEvents(MESSAGES_FILE);
+            List<Event> allEventsFromFile = fileParser.getAllEvents(filePath);
             for(Event event : allEventsFromFile) {
                 try {
                     eventPublisher.publish(event);

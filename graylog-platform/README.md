@@ -34,7 +34,7 @@ Tests are ran by executing:
 ## How to execute the parser?
 TFollowing command execute the application. Thus the application publishes the messages on Graylog:
     
-     java -jar ./target/graylog-sender.jar
+     java -jar ./target/graylog-sender.jar /path_to_file/sample-messages.txt
 
 ## Dependency
 Currently the only dependency the application has is Graylog. It requires Graylog to be up and running healthy.
@@ -54,9 +54,3 @@ For instance the messages overview and
 
 ###Message details
 ![Message details](src/main/resources/images/message_detail.png)
-
-## Missing feature
-
-Currently the file is read from the resources directory and its name is hardcoded on the code, so it do not allow importing different files.
-
-Next step is to be able to pass the path to the file by a commandline argument.

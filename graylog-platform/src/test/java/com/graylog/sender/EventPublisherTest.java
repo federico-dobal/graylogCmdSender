@@ -22,7 +22,8 @@ import static org.mockito.Mockito.when;
 /**
  * Unit test for FileParserTest class.
  */
-@SpringBootTest(properties = { "graylog.url.host=127.0.0.1", "graylog.url.port=1234" })
+@SpringBootTest(properties = { "graylog.url.host=127.0.0.1", "graylog.url.port=1234" },
+args = "path")
 @TestPropertySource(properties={ "graylog.url.host=127.0.0.1", "graylog.url.port=1234" })
 @RunWith(SpringRunner.class)
 public class EventPublisherTest extends TestCase {

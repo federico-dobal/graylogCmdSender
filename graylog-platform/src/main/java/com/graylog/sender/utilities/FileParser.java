@@ -46,10 +46,10 @@ public class FileParser {
 
     }
 
-    private List<Event> parseFile(String filename) throws IOException{
+    private List<Event> parseFile(String filename) throws IOException {
 
-        Resource resource = new ClassPathResource(filename);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
+        InputStream is = new FileInputStream(filename);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
         return reader.lines().map(x -> {
             JSONObject obj = new JSONObject(x);

@@ -10,18 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.File;
 import java.util.List;
 
 /**
  * Unit test for FileParserTest class.
  */
-@SpringBootTest
+@SpringBootTest(args = "path")
 @RunWith(SpringRunner.class)
 public class FileParserTest extends TestCase {
 
     @Autowired
     private FileParser fileParser;
 
+    private static String RESOURCES_PATH = "src/test/resources/";
     private static String MESSAGES_FILE = "sample-10-messages.txt";
     private static String MESSAGES_FILE_1_EVENT = "sample-1-messages.txt";
     private static String MESSAGES_EMPTY_FILE = "sample-messages-empty.txt";
@@ -33,7 +35,8 @@ public class FileParserTest extends TestCase {
      */
     @Test
     public void testGetAllEventsSuccessfulParse10Messages() throws FileParserException {
-        assertEquals(10, fileParser.getAllEvents(MESSAGES_FILE).size());
+        File file = new File(String.format("%s/%s", RESOURCES_PATH, MESSAGES_FILE));
+        assertEquals(10, fileParser.getAllEvents(file.getAbsolutePath()).size());
     }
 
     /**
@@ -42,7 +45,8 @@ public class FileParserTest extends TestCase {
      */
     @Test
     public void testGetAllEventsSuccessfulRetrieveDetails() throws FileParserException{
-        List<Event> allEvents = fileParser.getAllEvents(MESSAGES_FILE_1_EVENT);
+        File file = new File(String.format("%s/%s", RESOURCES_PATH, MESSAGES_FILE_1_EVENT));
+        List<Event> allEvents = fileParser.getAllEvents(file.getAbsolutePath());
         assertEquals(1, allEvents.size());
         Event actualEvent = allEvents.get(0);
 
@@ -68,7 +72,9 @@ public class FileParserTest extends TestCase {
      */
     @Test
     public void testGetAllEventsSuccessfulEmptyFile() throws FileParserException{
-        assertEquals(0, fileParser.getAllEvents(MESSAGES_EMPTY_FILE).size());
+
+        File file = new File(String.format("%s/%s", RESOURCES_PATH, MESSAGES_EMPTY_FILE));
+        assertEquals(0, fileParser.getAllEvents(file.getAbsolutePath()).size());
     }
 
     /**
@@ -77,6 +83,7 @@ public class FileParserTest extends TestCase {
      */
     @Test(expected = FileParserException.class)
     public void testGetAllEventsFileNotFound() throws FileParserException {
-        fileParser.getAllEvents(MESSAGES_FILE_NOT_FOUND);
+        File file = new File(String.format("%s/%s", RESOURCES_PATH, MESSAGES_FILE_NOT_FOUND));
+        fileParser.getAllEvents(file.getAbsolutePath());
     }
 }
