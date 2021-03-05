@@ -54,3 +54,9 @@ For instance the messages overview and
 
 ###Message details
 ![Message details](src/main/resources/images/message_detail.png)
+
+## Missing feature
+
+Currently the file is read from the resources directory and its name is hardcoded on the code, so it do not allow importing different files.
+
+Next step is to be able to pass the path to the file by a commandline argument.
