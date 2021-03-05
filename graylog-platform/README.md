@@ -1,7 +1,8 @@
 # Graylog command line publisher
 
 ## Overview
-This project implements a command line application that reads events from a text file and publish them on Graylog by using the [GELF](https://docs.graylog.org/en/4.0/pages/gelf.html) message format.
+This project implements a command line application that reads events from a text file and publish them on Graylog by 
+using the [GELF](https://docs.graylog.org/en/4.0/pages/gelf.html) message format.
 
 ## Technical implementation overview
 The application relies on the following 2 features:
@@ -19,3 +20,18 @@ The application solution is structured as follows:
 3. For each event:
     * convert the event to GELF format
     * Use /gelf API endpoint to publish the message on Graylog
+
+## How to build the project?
+The project can be build by executing:
+    
+     mvn clean install 
+
+## How to execute the tests?
+Tests are ran by executing:
+         
+          mvn test
+          
+## How to execute the parser?
+TFollowing command execute the application. Thus the application publishes the messages on Graylog:
+    
+     java -jar ./target/graylog-sender.jar

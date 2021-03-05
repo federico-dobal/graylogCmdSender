@@ -17,16 +17,16 @@ public class EventPublisher {
 
     private static Logger LOG = LoggerFactory.getLogger(FileParser.class);
 
-    private String GRAYLOG_URL_HOST;
-    private String GRAYLOG_URL_PORT;
+    private String graylogUrlHost;
+    private String graylogUrlPort;
     private OkHttpClient client;
 
     public EventPublisher(@Autowired OkHttpClient client,
                           @Value("${graylog.url.host:localhost}") String graylogHost,
                           @Value("${graylog.url.port:1234}") String graylogPort) {
         this.client = client;
-        this.GRAYLOG_URL_HOST = graylogHost;
-        this.GRAYLOG_URL_PORT = graylogPort;
+        this.graylogUrlHost = graylogHost;
+        this.graylogUrlPort = graylogPort;
     }
 
     /**
@@ -49,7 +49,7 @@ public class EventPublisher {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, obj.toString());
         Request request = new Request.Builder()
-                .url(String.format("http://%s:%s/gelf", GRAYLOG_URL_HOST, GRAYLOG_URL_PORT))
+                .url(String.format("http://%s:%s/gelf", graylogUrlHost, graylogUrlPort))
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();
